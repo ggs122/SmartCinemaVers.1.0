@@ -62,7 +62,9 @@ public class CinemaHallImpl implements CinemaHall {
 
     @Override
     public void createCinemaHall(int cinemaHallseats, int aisle) {
-        cinemaHalls = new CinemaHallImpl[cinemaHallseats][aisle];
+        this.cinemaHallseats = cinemaHallseats;
+        this.aisle = aisle;
+        this.cinemaHalls = new CinemaHallImpl[cinemaHallseats][aisle];
     }
 
     @Override
@@ -79,7 +81,7 @@ public class CinemaHallImpl implements CinemaHall {
     public void printCinemaHall() {
         for (int i = 0; i < cinemaHallseats; i++) {
             for (int j = 0; j < aisle; j++) {
-                System.out.print(cinemaHalls[i][j]);
+                System.out.print(cinemaHalls[i][j].clientFirstName);
             }
 
             System.out.println();
