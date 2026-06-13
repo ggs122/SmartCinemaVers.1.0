@@ -7,4 +7,8 @@ public interface Client1 {
     void findClient(long clientId);
 
     void printClient();
+
+    void printClientToSort();
+
+    void deletClientForId(long clientId);
 }

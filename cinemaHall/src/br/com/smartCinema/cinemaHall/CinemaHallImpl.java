@@ -10,7 +10,7 @@ public class CinemaHallImpl implements CinemaHall {
     private int cinemaHallNumber;
     private int cinemaHallseats;
     private int aisle;
-    private CinemaHallImpl cinemaHall = new CinemaHallImpl();
+
     static List<ClientImpl> clientList;
 
     Locale localeBr = Locale.forLanguageTag("pt-BR");
@@ -40,9 +40,7 @@ public class CinemaHallImpl implements CinemaHall {
         return aisle;
     }
 
-    protected CinemaHallImpl getCinemaHall() {
-        return cinemaHall;
-    }
+
 
     public static List<ClientImpl> getClientList() {
         return clientList;
@@ -53,6 +51,16 @@ public class CinemaHallImpl implements CinemaHall {
         for (int i = 0; i < cinemaHallseats; i++) {
             for (int j = 0; j < aisle; i++) {
                 cinemaHalls[i][j] = new CinemaHallImpl(i+ 1, j + 1, cinemaHallNumber);
+            }
+        }
+    }
+
+    @Override
+    public void printCinemaHall() {
+        for (int i = 0; i < cinemaHallseats; i++) {
+            System.out.print(i);
+            for (int j = 0; j < aisle; i++) {
+                System.out.println(j);
             }
         }
     }

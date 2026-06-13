@@ -5,6 +5,8 @@ import br.com.smartCinema.interfaces.Client1;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 
 public class ClientImpl implements Client1 {
@@ -109,7 +111,40 @@ public class ClientImpl implements Client1 {
                 IO.println(c);
             }
             IO.println("----------------------------------------------------------------------------------------------");
+        } else {
+            if (clientList.isEmpty()) {
+                IO.println("Nada a mostrar -> Clientes não cadastrados!");
+            }
         }
+    }
+
+    @Override
+    public void printClientToSort() {
+        if (!clientList.isEmpty()) {
+            IO.println("----------------------------------------------------------------------------------------------");
+            IO.println("> Lista de clientes / Ordem alfabética <");
+            clientList
+                    .stream()
+                    .collect(Collectors.groupingBy(c -> c.clientFirstName.charAt(0), TreeMap::new, Collectors.toList()))
+                    .forEach((m, l) -> IO.println("-> " + m + " " + l));
+            IO.println("----------------------------------------------------------------------------------------------");
+        }
+    }
+
+    @Override
+    public void deletClientForId(long clientId) {
+       boolean removeClientBoolean = clientList.removeIf(c -> c.clientId == clientId);
+       if (removeClientBoolean == true) {
+           IO.println("-------------------------------------------------------------------------------------");
+           IO.println(String.format(localeBr, "Cliente com o Id %d -> Deletado com sucesso!", clientId));
+           IO.println("-------------------------------------------------------------------------------------");
+       } else {
+           if (removeClientBoolean == false) {
+               IO.println("-------------------------------------------------------------------------------------");
+               IO.println(String.format(localeBr, "Cliente com o Id %d -> Inexistente", clientId));
+               IO.println("-------------------------------------------------------------------------------------");
+           }
+       }
     }
 
     @Override
