@@ -11,7 +11,13 @@ public class CinemaHallImpl implements CinemaHall {
     private int cinemaHallseats;
     private int aisle;
 
-    static List<ClientImpl> clientList;
+    private String clientFirstName;
+    private String clientMidlleName;
+    private String clientLastName;
+    private long clientId;
+    private long clientTicket;
+
+    static List<ClientImpl> clientList = getClientList();
 
     Locale localeBr = Locale.forLanguageTag("pt-BR");
 
@@ -23,6 +29,14 @@ public class CinemaHallImpl implements CinemaHall {
         this.cinemaHallseats = cinemaHallseats;
         this.aisle = aisle;
         this.cinemaHallNumber = cinemaHallNumber;
+    }
+
+    private CinemaHallImpl(String clientFirstName, String clientMidlleName, String clientLastName, int clientTicket, int clientId) {
+        this.clientFirstName = clientFirstName;
+        this.clientMidlleName = clientMidlleName;
+        this.clientLastName = clientLastName;
+        this.clientTicket = clientTicket;
+        this.clientId = clientId;
     }
 
 
@@ -47,10 +61,15 @@ public class CinemaHallImpl implements CinemaHall {
     }
 
     @Override
-    public void createCinemaHall(int cinemaHallseats, int aisle, int cinemaHallNumber) {
-        for (int i = 0; i < cinemaHallseats; i++) {
-            for (int j = 0; j < aisle; i++) {
-                cinemaHalls[i][j] = new CinemaHallImpl(i+ 1, j + 1, cinemaHallNumber);
+    public void createCinemaHall(int cinemaHallseats, int aisle) {
+        cinemaHalls = new CinemaHallImpl[cinemaHallseats][aisle];
+    }
+
+    public void putClientInHall(long clientId, int cinemaHallseats, int aisle) {
+        for (var c : clientList) {
+            if ( c.getClientId() == clientId) {
+                CinemaHallImpl cinemaHall = new CinemaHallImpl(c.getClientFirstName(), c.getClientMidlleName(), c.getClientLastName(), (int) c.getClientTicket(), (int) c.getClientId());
+                cinemaHalls[cinemaHallseats][aisle] = cinemaHall;
             }
         }
     }

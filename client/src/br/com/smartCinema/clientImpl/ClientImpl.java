@@ -32,23 +32,23 @@ public class ClientImpl implements Client1 {
 
     public ClientImpl() {}
 
-    protected String getClientFirstName() {
+    public String getClientFirstName() {
         return clientFirstName;
     }
 
-    protected String getClientMidlleName() {
+    public String getClientMidlleName() {
         return clientMidlleName;
     }
 
-    protected String getClientLastName() {
+    public String getClientLastName() {
         return clientLastName;
     }
 
-    protected long getClientTicket() {
+    public long getClientTicket() {
         return clientTicket;
     }
 
-    protected long getClientId() {
+    public long getClientId() {
         return clientId;
     }
 

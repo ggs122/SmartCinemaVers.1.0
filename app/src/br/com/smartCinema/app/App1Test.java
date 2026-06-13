@@ -25,7 +25,7 @@ public class App1Test {
                 .findFirst()
                 .orElseThrow();
 
-        cinemaHall1.createCinemaHall(10, 3, 1);
+        cinemaHall1.createCinemaHall(10, 3);
         cinemaHall1.printCinemaHall();
     }
 
