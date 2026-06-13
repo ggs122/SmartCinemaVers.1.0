@@ -12,6 +12,7 @@ public class App1Test {
          client1.createClient("Paola", "Oliveira", "Guimarães");
          client1.createClient("Cristina", "Almeida", "Soares");
          client1.printClient();
+         client1.findClient(400);
     }
 
 }

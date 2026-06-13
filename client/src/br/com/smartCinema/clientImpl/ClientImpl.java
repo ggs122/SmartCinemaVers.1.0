@@ -56,14 +56,59 @@ public class ClientImpl implements Client1 {
 
     @Override
     public void createClient(String clientFirstName, String clientMidlleName, String clientLastName) {
-        ClientImpl client = new ClientImpl(clientFirstName, clientMidlleName, clientLastName, clientIdStatic++, clientTicketStatic++);
+        Locale localeBr = Locale.forLanguageTag("pt-BR");
+        for (var c : clientList) {
+            if (c.clientFirstName.equalsIgnoreCase(clientFirstName) && c.clientMidlleName.equalsIgnoreCase(clientMidlleName) && c.clientLastName.equalsIgnoreCase(clientLastName)) {
+                IO.println("------------------------------------------------------------------------------------------------------------------");
+                IO.println(String.format(localeBr, "Cliente: %s %s %s -> Já cadastrado anteriormente e por isso não pôde ser cadastrado.", clientFirstName, clientMidlleName, clientLastName));
+                IO.println("------------------------------------------------------------------------------------------------------------------");
+                return;
+            }
+        }
+
+        ClientImpl client = new ClientImpl(clientFirstName.trim().toUpperCase(), clientMidlleName.trim().toUpperCase(), clientLastName.trim().toUpperCase(), clientIdStatic++, clientTicketStatic++);
         clientList.add(client);
     }
 
     @Override
+    public void findClient(long clientId) {
+        if (!clientList.isEmpty()) {
+           boolean foundClientId = clientList
+                    .stream()
+                            .anyMatch(c -> c.clientId == clientId);
+
+           if (foundClientId == true) {
+               IO.println("----------------------------------------------------------------------------------------------");
+               IO.println("Cliente encontrado(a):");
+               clientList
+                       .stream()
+                       .filter(c -> c.clientId == clientId)
+                       .forEach(c -> IO.println(c));
+               IO.println("----------------------------------------------------------------------------------------------");
+           } else {
+               if (foundClientId == false) {
+                   IO.println("----------------------------------------------------------------------------------------------");
+                   IO.println(String.format(localeBr, "Cliente Id %d -> Não encontrado!", clientId));
+                   IO.println("----------------------------------------------------------------------------------------------");
+               }
+           }
+        } else {
+            if (clientList.isEmpty()) {
+                IO.println("Clientes ainda não cadastrados.");
+            }
+        }
+
+    }
+
+    @Override
     public void printClient() {
-        for (var c : clientList) {
-            IO.println(c);
+        if (!clientList.isEmpty()) {
+            IO.println("----------------------------------------------------------------------------------------------");
+            IO.println("> Lista de Clientes <");
+            for (var c : clientList) {
+                IO.println(c);
+            }
+            IO.println("----------------------------------------------------------------------------------------------");
         }
     }
 
