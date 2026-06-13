@@ -65,6 +65,7 @@ public class CinemaHallImpl implements CinemaHall {
         cinemaHalls = new CinemaHallImpl[cinemaHallseats][aisle];
     }
 
+    @Override
     public void putClientInHall(long clientId, int cinemaHallseats, int aisle) {
         for (var c : clientList) {
             if ( c.getClientId() == clientId) {
