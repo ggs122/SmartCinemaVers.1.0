@@ -78,10 +78,11 @@ public class CinemaHallImpl implements CinemaHall {
     @Override
     public void printCinemaHall() {
         for (int i = 0; i < cinemaHallseats; i++) {
-            System.out.print(i);
-            for (int j = 0; j < aisle; i++) {
-                System.out.println(j);
+            for (int j = 0; j < aisle; j++) {
+                System.out.print(cinemaHalls[i][j]);
             }
+
+            System.out.println();
         }
     }
 
