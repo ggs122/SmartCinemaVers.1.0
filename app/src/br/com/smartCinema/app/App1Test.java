@@ -26,7 +26,7 @@ public class App1Test {
                 .orElseThrow();
 
         cinemaHall1.createCinemaHall(10, 3);
-        cinemaHall1.putClientInHall(400, 0, 0);
+        cinemaHall1.putClientInHall(400, 0, 1);
         cinemaHall1.printCinemaHall();
     }
 

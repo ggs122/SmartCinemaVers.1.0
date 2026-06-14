@@ -5,6 +5,8 @@ import br.com.smartCinema.interfaces.CinemaHall;
 import java.util.List;
 import java.util.Locale;
 
+import static br.com.smartCinema.clientImpl.ClientImpl.getClientList;
+
 public class CinemaHallImpl implements CinemaHall {
 
     private int cinemaHallNumber;
@@ -54,12 +56,6 @@ public class CinemaHallImpl implements CinemaHall {
         return aisle;
     }
 
-
-
-    public static List<ClientImpl> getClientList() {
-        return clientList;
-    }
-
     @Override
     public void createCinemaHall(int cinemaHallseats, int aisle) {
         this.cinemaHallseats = cinemaHallseats;
@@ -73,6 +69,7 @@ public class CinemaHallImpl implements CinemaHall {
             if ( c.getClientId() == clientId) {
                 CinemaHallImpl cinemaHall = new CinemaHallImpl(c.getClientFirstName(), c.getClientMidlleName(), c.getClientLastName(), (int) c.getClientTicket(), (int) c.getClientId());
                 cinemaHalls[cinemaHallseats][aisle] = cinemaHall;
+                break;
             }
         }
     }
@@ -81,7 +78,7 @@ public class CinemaHallImpl implements CinemaHall {
     public void printCinemaHall() {
         for (int i = 0; i < cinemaHallseats; i++) {
             for (int j = 0; j < aisle; j++) {
-                System.out.print(cinemaHalls[i][j].clientFirstName);
+                System.out.print(cinemaHalls[i][j]);
             }
 
             System.out.println();
