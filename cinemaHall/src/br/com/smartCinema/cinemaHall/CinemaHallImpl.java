@@ -10,6 +10,8 @@ import static br.com.smartCinema.clientImpl.ClientImpl.getClientList;
 public class CinemaHallImpl implements CinemaHall {
 
     private int cinemaHallNumber;
+    private long seatNumber;
+    private static long seatNumberStatic = 1;
     private int cinemaHallseats;
     private int aisle;
 
@@ -27,13 +29,22 @@ public class CinemaHallImpl implements CinemaHall {
 
     public CinemaHallImpl() {}
 
-    private CinemaHallImpl(int cinemaHallseats, int aisle, int cinemaHallNumber) {
+    private CinemaHallImpl(int cinemaHallseats, int aisle, int cinemaHallNumber, long seatNumber) {
         this.cinemaHallseats = cinemaHallseats;
         this.aisle = aisle;
         this.cinemaHallNumber = cinemaHallNumber;
     }
 
     private CinemaHallImpl(String clientFirstName, String clientMidlleName, String clientLastName, int clientTicket, int clientId) {
+        this.clientFirstName = clientFirstName;
+        this.clientMidlleName = clientMidlleName;
+        this.clientLastName = clientLastName;
+        this.clientTicket = clientTicket;
+        this.clientId = clientId;
+    }
+
+    private CinemaHallImpl(String clientFirstName, String clientMidlleName, String clientLastName, int clientTicket, int clientId, long seatNumber) {
+        this.seatNumber = seatNumber;
         this.clientFirstName = clientFirstName;
         this.clientMidlleName = clientMidlleName;
         this.clientLastName = clientLastName;
@@ -61,6 +72,13 @@ public class CinemaHallImpl implements CinemaHall {
         this.cinemaHallseats = cinemaHallseats;
         this.aisle = aisle;
         this.cinemaHalls = new CinemaHallImpl[cinemaHallseats][aisle];
+
+        for (int i = 0; i < cinemaHallseats; i++) {
+            for (int j = 0; j < aisle; j++) {
+                cinemaHalls[i][j] = new CinemaHallImpl(i + 1, j + 1, 0, 0);
+                cinemaHalls[i][j] = new CinemaHallImpl("Cliente ", " ainda ", " não definido ", 0, 0, seatNumberStatic++);
+            }
+        }
     }
 
     @Override
@@ -78,7 +96,7 @@ public class CinemaHallImpl implements CinemaHall {
     public void printCinemaHall() {
         for (int i = 0; i < cinemaHallseats; i++) {
             for (int j = 0; j < aisle; j++) {
-                System.out.print(cinemaHalls[i][j]);
+                System.out.print(cinemaHalls[i][j] + "      ");
             }
 
             System.out.println();
@@ -87,6 +105,6 @@ public class CinemaHallImpl implements CinemaHall {
 
     @Override
     public String toString() {
-        return String.format(localeBr, "Corredor: %d | Assento: %d | Sala de Cinema %d", aisle, cinemaHallseats, cinemaHallNumber);
+        return String.format(localeBr, "[Assento: %d | Id: %-3d | Nome: %s %s %-10s | Bilhete Nº %d]", seatNumber, clientId, clientFirstName, clientMidlleName, clientLastName, clientTicket);
     }
 }
