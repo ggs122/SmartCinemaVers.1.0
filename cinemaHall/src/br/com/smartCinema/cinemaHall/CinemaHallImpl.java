@@ -29,7 +29,7 @@ public class CinemaHallImpl implements CinemaHall {
 
     public CinemaHallImpl() {}
 
-    private CinemaHallImpl(int cinemaHallseats, int aisle, int cinemaHallNumber, long seatNumber) {
+    private CinemaHallImpl(int cinemaHallseats, int aisle, int cinemaHallNumber) {
         this.cinemaHallseats = cinemaHallseats;
         this.aisle = aisle;
         this.cinemaHallNumber = cinemaHallNumber;
@@ -75,8 +75,7 @@ public class CinemaHallImpl implements CinemaHall {
 
         for (int i = 0; i < cinemaHallseats; i++) {
             for (int j = 0; j < aisle; j++) {
-                cinemaHalls[i][j] = new CinemaHallImpl(i + 1, j + 1, 0, 0);
-                cinemaHalls[i][j] = new CinemaHallImpl("Cliente ", " ainda ", " não definido ", 0, 0, seatNumberStatic++);
+                cinemaHalls[i][j] = new CinemaHallImpl("Cliente ", " ainda ", " não definido ", 0, 0);
             }
         }
     }
@@ -105,6 +104,6 @@ public class CinemaHallImpl implements CinemaHall {
 
     @Override
     public String toString() {
-        return String.format(localeBr, "[Assento: %d | Id: %-3d | Nome: %s %s %-10s | Bilhete Nº %d]", seatNumber, clientId, clientFirstName, clientMidlleName, clientLastName, clientTicket);
+        return String.format(localeBr, "[C: %d | A: %d | Id: %-3d | Nome: %s %s %-10s | Bilhete Nº %d]", aisle, cinemaHallseats, clientId, clientFirstName, clientMidlleName, clientLastName, clientTicket);
     }
 }
