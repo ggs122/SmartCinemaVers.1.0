@@ -149,6 +149,6 @@ public class ClientImpl implements Client1 {
 
     @Override
     public String toString() {
-        return String.format(localeBr, "Id: %d | Nome: %-15s %-15s %-15s | Ingresso: %d", clientId ,clientFirstName, clientMidlleName, clientLastName, clientTicket);
+        return String.format(localeBr, "Id: %d | Nome: %-15s %-15s %-10s | Ingresso: %d", clientId ,clientFirstName, clientMidlleName, clientLastName, clientTicket);
     }
 }
