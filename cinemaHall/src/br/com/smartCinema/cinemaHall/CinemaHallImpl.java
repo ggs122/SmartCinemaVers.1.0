@@ -97,6 +97,7 @@ public class CinemaHallImpl implements CinemaHall {
         }
     }
 
+    //TODO falta deste método para frente.
     @Override
     public void putClientInHall(long clientId, int cinemaHallseats, int aisle) {
         for (var c : clientList) {
