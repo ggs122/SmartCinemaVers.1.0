@@ -100,11 +100,10 @@ public class CinemaHallImpl implements CinemaHall {
     //TODO falta deste método para frente.
     @Override
     public void putClientInHall(long clientId, int cinemaHallseats, int aisle) {
+
         for (var c : clientList) {
             if ( c.getClientId() == clientId) {
-                CinemaHallImpl cinemaHall = new CinemaHallImpl(c.getClientFirstName(), c.getClientMidlleName(), c.getClientLastName(), (int) c.getClientTicket(), (int) c.getClientId());
-                cinemaHalls[cinemaHallseats][aisle] = cinemaHall;
-                break;
+                cinemaHalls[cinemaHallseats][aisle] = new CinemaHallImpl(c.getClientFirstName(), c.getClientMidlleName(), c.getClientLastName(), (int) c.getClientTicket(), (int) c.getClientId());
             }
         }
     }
@@ -122,6 +121,6 @@ public class CinemaHallImpl implements CinemaHall {
 
     @Override
     public String toString() {
-        return String.format(localeBr, "[C: %d | A: %d | Id: %-3d | Nome: %s %s %-10s | Bilhete Nº %d]", aisle, cinemaHallseats, clientId, clientFirstName, clientMidlleName, clientLastName, clientTicket);
+        return String.format(localeBr, "[C: %-3d | A: %d | Id: %-3d | Nome: %s %s %-10s | Bilhete Nº %-8d]", rowNumber, colNumber, clientId, clientFirstName, clientMidlleName, clientLastName, clientTicket);
     }
 }
