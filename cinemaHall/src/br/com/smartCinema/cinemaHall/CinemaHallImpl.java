@@ -10,11 +10,12 @@ import static br.com.smartCinema.clientImpl.ClientImpl.getClientList;
 public class CinemaHallImpl implements CinemaHall {
 
     private int cinemaHallNumber;
-    private long seatNumber;
-    private static long seatNumberStatic = 1;
     private int cinemaHallseats;
     private int aisle;
 
+    private long seatNumber;
+    private int rowNumber;
+    private int colNumber;
     private String clientFirstName;
     private String clientMidlleName;
     private String clientLastName;
@@ -29,21 +30,35 @@ public class CinemaHallImpl implements CinemaHall {
 
     public CinemaHallImpl() {}
 
-    private CinemaHallImpl(int cinemaHallseats, int aisle, int cinemaHallNumber) {
+    private CinemaHallImpl(int cinemaHallseats, int aisle) {
         this.cinemaHallseats = cinemaHallseats;
         this.aisle = aisle;
-        this.cinemaHallNumber = cinemaHallNumber;
+    }
+
+    private CinemaHallImpl(int rowNumber, int colNumber, long seatNumber) {
+        this.rowNumber = rowNumber;
+        this.colNumber = colNumber;
+        this.seatNumber = seatNumber;
+        this.clientFirstName = "Cliente";
+        this.clientMidlleName = "ainda";
+        this.clientLastName = "não definido";
+        this.clientId = 0;
+        this.clientTicket = 0;
+
+    }
+
+    private CinemaHallImpl(long seatNumber, int rowNumber, int colNumber, ClientImpl client) {
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
+        this.colNumber = colNumber;
+        this.clientFirstName = client.getClientFirstName();
+        this.clientMidlleName = client.getClientMidlleName();
+        this.clientLastName = client.getClientLastName();
+        this.clientId = client.getClientId();
+        this.clientTicket = client.getClientTicket();
     }
 
     private CinemaHallImpl(String clientFirstName, String clientMidlleName, String clientLastName, int clientTicket, int clientId) {
-        this.clientFirstName = clientFirstName;
-        this.clientMidlleName = clientMidlleName;
-        this.clientLastName = clientLastName;
-        this.clientTicket = clientTicket;
-        this.clientId = clientId;
-    }
-
-    private CinemaHallImpl(String clientFirstName, String clientMidlleName, String clientLastName, int clientTicket, int clientId, long seatNumber) {
         this.seatNumber = seatNumber;
         this.clientFirstName = clientFirstName;
         this.clientMidlleName = clientMidlleName;
@@ -72,10 +87,12 @@ public class CinemaHallImpl implements CinemaHall {
         this.cinemaHallseats = cinemaHallseats;
         this.aisle = aisle;
         this.cinemaHalls = new CinemaHallImpl[cinemaHallseats][aisle];
+        long sequentialSeatId = 1;
 
         for (int i = 0; i < cinemaHallseats; i++) {
             for (int j = 0; j < aisle; j++) {
-                cinemaHalls[i][j] = new CinemaHallImpl("Cliente ", " ainda ", " não definido ", 0, 0);
+                cinemaHalls[i][j] = new CinemaHallImpl(i + 1, j + 1, sequentialSeatId);
+                sequentialSeatId++;
             }
         }
     }
